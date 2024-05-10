@@ -26,7 +26,9 @@ export default {
         version: 'Version'
       }
     },
-
+    holiday: {
+      loading: 'Waiting a moment...'
+    }
   },
   header: {
     title: "API Public",

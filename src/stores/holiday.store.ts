@@ -23,7 +23,9 @@ export const useHolidayStore = defineStore('holidaystore', {
         }
       })
 
-      this.changeLoading(false)
+      setTimeout(() => {
+        this.changeLoading(false)
+      }, 1000)
     },
     changeLoading (value: boolean) {
       this.isLoading = value

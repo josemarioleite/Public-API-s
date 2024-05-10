@@ -25,6 +25,9 @@ export default {
         comment: 'Ver comentário',
         version: 'Versão'
       }
+    },
+    holiday: {
+      loading: 'Aguardem um momento...'
     }
   },
   header: {
