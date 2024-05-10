@@ -1,4 +1,5 @@
 import { boot } from 'quasar/wrappers'
+import 'vue-cal/dist/vuecal.css'
 
-export default boot(async ({ app }) => {
+export default boot(({ app }) => {
 })

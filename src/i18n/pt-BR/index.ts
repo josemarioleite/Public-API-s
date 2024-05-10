@@ -3,7 +3,8 @@ export default {
     title: {
       home: 'Início',
       bible: 'A Bíblia Sagrada',
-      anime: 'Anime'
+      anime: 'Anime',
+      holiday: 'Feriados'
     },
     bible: {
       header: {
@@ -29,7 +30,7 @@ export default {
   header: {
     title: "API's Públicas",
     main: {
-      title: "Início_A-Bíblia-Sagrada_Anime"
+      title: "Início_A-Bíblia-Sagrada_Feriados"
     }
   }
 }

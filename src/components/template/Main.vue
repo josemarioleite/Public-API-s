@@ -40,8 +40,8 @@ const titleMain = computed(() => $t('header.main.title').split('_').map(str => s
 const mains = computed(() => {
   const main: Array<Main> = [
     // { icon: 'home', title: titleMain.value[0], page: 'home' },
-    { icon: 'auto_stories', title: titleMain.value[1], page: 'holy-bible' }
-    // { icon: 'live_tv', title: titleMain.value[2], page: 'anime' }
+    { icon: 'auto_stories', title: titleMain.value[1], page: 'holy-bible' },
+    { icon: 'calendar_month', title: titleMain.value[2], page: 'holiday' }
   ]
 
   return main

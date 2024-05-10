@@ -3,7 +3,8 @@ export default {
     title: {
       home: 'Home',
       bible: 'The Holy Bible',
-      anime: 'Anime'
+      anime: 'Animes',
+      holiday: 'Holidays'
     },
     bible: {
       header: {
@@ -24,12 +25,13 @@ export default {
         comment: 'See comment',
         version: 'Version'
       }
-    }
+    },
+
   },
   header: {
     title: "API Public",
     main: {
-      title: "Home_The-Holy-Bible_Anime"
+      title: "Home_The-Holy-Bible_Holidays"
     }
   }
 }

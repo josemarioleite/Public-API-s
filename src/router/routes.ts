@@ -1,5 +1,5 @@
 import { RouteRecordRaw } from 'vue-router'
-import { Home, Bible, DetailBook } from 'src/pages/index'
+import { Home, Bible, DetailBook, Holiday } from 'src/pages/index'
 
 const routes: RouteRecordRaw[] = [
   {
@@ -16,6 +16,11 @@ const routes: RouteRecordRaw[] = [
     path: '/holy-bible/detail/:abbrev',
     name: 'detail-book',
     component: DetailBook
+  },
+  {
+    path: '/holiday',
+    name: 'holiday',
+    component: Holiday
   }
 ]
 
