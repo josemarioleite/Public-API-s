@@ -29,12 +29,9 @@
     @view-change="eventChange"
   >
     <template #events-count="{ events }">
-      <div v-if="activeView !== 'year'">
-        {{ events.length }}
-      </div>
-      <div v-else>
+      <span style="cursor: pointer;">
         {{ String(events.map(v => v.content)).replace('[\[\."\]]', '') }}
-      </div>
+      </span>
     </template>
   </VueCal>
 </template>
@@ -49,9 +46,9 @@ defineOptions({
   name: 'VueCal',
 })
 
+const currentDate = ref(new Date())
 const activeView = ref<string>('month')
 const holidayStore = useHolidayStore()
-const currentDate = ref(new Date())
 const lang = computed(() => {
   let lang = localStorage.getItem('local-language') || 'pt-br'
   if (lang === 'en-US') {
@@ -68,11 +65,15 @@ const loadHolidaysWithYear = async () => {
 }
 
 const eventChange = async (value: any) => {
-  console.log(value)
-  // const date = new Date(value.endDate)
-  // currentDate.value = date
+  const dateParam = new Date(value.endDate)
 
-  // await loadHolidaysWithYear()
+  if (currentDate.value.getFullYear() !== dateParam.getFullYear()) {
+    currentDate.value = dateParam
+
+    return await loadHolidaysWithYear()
+  }
+
+  return currentDate.value = dateParam
 }
 
 onMounted(async () => {
@@ -110,8 +111,8 @@ onMounted(async () => {
 }
 
 .vuecal .vuecal__cell-content:hover {
-  background: #2196f3;
-  color: #fff;
+  background: #F1F2F3;
+  cursor: default;
 }
 
 .vuecal .vuecal__cell-date {
@@ -121,17 +122,18 @@ onMounted(async () => {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 120px;
+  height: 125px;
 }
 
 .vuecal .vuecal__cell-events-count {
   background: #000;
-  font-size: .9rem;
+  font-size: .7rem;
+  padding: 3px;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  height: 20px;
+  height: auto;
   width: 100%;
   border-radius: 5px;
 }
