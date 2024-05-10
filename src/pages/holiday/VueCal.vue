@@ -14,21 +14,26 @@
 </template>
 <template v-else>
   <VueCal
-    active-view="year"
     eventsCountOnYearView
     hideViewSelector
     class="vuecal"
     cell-contextmenu
+    clickToNavigate
+    :active-view="activeView"
+    :dblclick-to-navigate="false"
     :events="events"
     :selected-date="currentDate"
     :locale="lang"
-    :disable-views="['years', 'day', 'week']"
+    :disable-views="['years', 'day', 'week', 'year']"
     :time="false"
     @view-change="eventChange"
   >
-    <template #event="{ event }">
-      <div>
-        {{ event.content }}
+    <template #events-count="{ events }">
+      <div v-if="activeView !== 'year'">
+        {{ events.length }}
+      </div>
+      <div v-else>
+        {{ String(events.map(v => v.content)).replace('[\[\."\]]', '') }}
       </div>
     </template>
   </VueCal>
@@ -44,6 +49,7 @@ defineOptions({
   name: 'VueCal',
 })
 
+const activeView = ref<string>('month')
 const holidayStore = useHolidayStore()
 const currentDate = ref(new Date())
 const lang = computed(() => {
@@ -62,10 +68,11 @@ const loadHolidaysWithYear = async () => {
 }
 
 const eventChange = async (value: any) => {
-  const date = new Date(value.endDate)
-  currentDate.value = date
+  console.log(value)
+  // const date = new Date(value.endDate)
+  // currentDate.value = date
 
-  await loadHolidaysWithYear()
+  // await loadHolidaysWithYear()
 }
 
 onMounted(async () => {
@@ -125,7 +132,7 @@ onMounted(async () => {
   align-items: center;
   justify-content: center;
   height: 20px;
-  width: 20px;
+  width: 100%;
   border-radius: 5px;
 }
 </style>
