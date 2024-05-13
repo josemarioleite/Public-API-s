@@ -26,7 +26,18 @@ export default {
         version: 'Version'
       }
     },
-
+    holiday: {
+      loading: 'Waiting a moment...',
+      table: {
+        titleTable: 'Table',
+        name: 'Name',
+        nameInternational: 'Internacional Name',
+        global: {
+          title: 'Global Event',
+          value: 'Yes_No'
+        }
+      }
+    }
   },
   header: {
     title: "API Public",

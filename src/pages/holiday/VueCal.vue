@@ -1,15 +1,40 @@
 <template>
-<VueCal
-  active-view="month"
-  eventsCountOnYearView
-  hideViewSelector
-  class="vuecal"
-  :events="events"
-  :selected-date="currentDate"
-  :locale="lang"
-  :disable-views="['years', 'day', 'week']"
->
-</VueCal>
+<template v-if="isLoading">
+  <q-skeleton
+    class="skeleton"
+    animation="wave"
+  >
+    <q-inner-loading
+      :showing="isLoading"
+      :label="$t('pages.holiday.loading')"
+      label-class="text-blue"
+      label-style="font-size: 1.5rem"
+    />
+  </q-skeleton>
+</template>
+<template v-else>
+  <VueCal
+    eventsCountOnYearView
+    hideViewSelector
+    class="vuecal"
+    cell-contextmenu
+    clickToNavigate
+    :active-view="activeView"
+    :dblclick-to-navigate="false"
+    :events="events"
+    :selected-date="currentDate"
+    :locale="lang"
+    :disable-views="['years', 'day', 'week', 'year']"
+    :time="false"
+    @view-change="eventChange"
+  >
+    <template #events-count="{ events }">
+      <span style="cursor: pointer;">
+        {{ String(events.map(v => v.content)).replace('[\[\."\]]', '') }}
+      </span>
+    </template>
+  </VueCal>
+</template>
 </template>
 
 <script lang="ts" setup>
@@ -21,10 +46,10 @@ defineOptions({
   name: 'VueCal',
 })
 
+const activeView = ref<string>('month')
 const holidayStore = useHolidayStore()
-const currentDate = ref(new Date())
 const lang = computed(() => {
-  let lang = localStorage.getItem('local-language')
+  let lang = localStorage.getItem('local-language') || 'pt-br'
   if (lang === 'en-US') {
     return lang = 'en'
   }
@@ -32,11 +57,38 @@ const lang = computed(() => {
   return lang?.toLocaleLowerCase()
 })
 const events = computed(() => holidayStore.holidays)
+const isLoading = computed(() => holidayStore.isLoading)
 
-onMounted(async () => {
-  await holidayStore.loadHolidays(currentDate.value.getFullYear())
+const loadHolidaysWithYear = async () => {
+  await holidayStore.loadHolidays()
+}
+
+const eventChange = async (value: any) => {
+  const dateParam = new Date(value.endDate)
+
+  if (currentDate.value.getFullYear() !== dateParam.getFullYear()) {
+    currentDate.value = dateParam
+    holidayStore.setYear(dateParam.getFullYear())
+
+    return await loadHolidaysWithYear()
+  }
+
+  return currentDate.value = dateParam
+}
+
+const currentDate = computed(() => {
+  const yearStore = computed(() => holidayStore.year)
+  const date = new Date().getMonth()
+
+  return new Date(yearStore.value, date)
 })
 </script>
+
+<style lang="scss">
+.skeleton {
+  height: 75vh;
+}
+</style>
 
 <style>
 .vuecal {
@@ -62,27 +114,30 @@ onMounted(async () => {
 }
 
 .vuecal .vuecal__cell-content:hover {
-  background: #2196f3;
-  color: #fff;
+  background: #F1F2F3;
+  cursor: default;
 }
 
 .vuecal .vuecal__cell-date {
   font-family: "Ubuntu Sans Mono", monospace;
-  font-size: 1rem;
+  font-size: 1.2rem;
+
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100px;
+  height: 125px;
 }
 
 .vuecal .vuecal__cell-events-count {
   background: #000;
-  font-size: .8rem;
+  font-size: .7rem;
+  padding: 3px;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  height: 20px;
-  width: 25px;
+  height: auto;
+  width: 100%;
+  border-radius: 5px;
 }
 </style>

@@ -25,6 +25,18 @@ export default {
         comment: 'Ver comentário',
         version: 'Versão'
       }
+    },
+    holiday: {
+      loading: 'Aguardem um momento...',
+      table: {
+        titleTable: 'Tabela de feriados',
+        name: 'Nome',
+        nameInternational: 'Nome Internacional',
+        global: {
+          title: 'Evento Global',
+          value: 'Sim_Não'
+        }
+      }
     }
   },
   header: {
