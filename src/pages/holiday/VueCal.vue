@@ -46,6 +46,13 @@ defineOptions({
   name: 'VueCal',
 })
 
+const currentDate = computed(() => {
+  const yearStore = computed(() => holidayStore.year)
+  const date = new Date().getMonth()
+
+  return new Date(yearStore.value, date)
+})
+
 const activeView = ref<string>('month')
 const holidayStore = useHolidayStore()
 const lang = computed(() => {
@@ -75,13 +82,6 @@ const eventChange = async (value: any) => {
 
   return currentDate.value = dateParam
 }
-
-const currentDate = computed(() => {
-  const yearStore = computed(() => holidayStore.year)
-  const date = new Date().getMonth()
-
-  return new Date(yearStore.value, date)
-})
 </script>
 
 <style lang="scss">
