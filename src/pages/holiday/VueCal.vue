@@ -46,7 +46,6 @@ defineOptions({
   name: 'VueCal',
 })
 
-const currentDate = ref(new Date())
 const activeView = ref<string>('month')
 const holidayStore = useHolidayStore()
 const lang = computed(() => {
@@ -61,7 +60,7 @@ const events = computed(() => holidayStore.holidays)
 const isLoading = computed(() => holidayStore.isLoading)
 
 const loadHolidaysWithYear = async () => {
-  await holidayStore.loadHolidays(currentDate.value.getFullYear())
+  await holidayStore.loadHolidays()
 }
 
 const eventChange = async (value: any) => {
@@ -69,6 +68,7 @@ const eventChange = async (value: any) => {
 
   if (currentDate.value.getFullYear() !== dateParam.getFullYear()) {
     currentDate.value = dateParam
+    holidayStore.setYear(dateParam.getFullYear())
 
     return await loadHolidaysWithYear()
   }
@@ -76,8 +76,11 @@ const eventChange = async (value: any) => {
   return currentDate.value = dateParam
 }
 
-onMounted(async () => {
-  await loadHolidaysWithYear()
+const currentDate = computed(() => {
+  const yearStore = computed(() => holidayStore.year)
+  const date = new Date().getMonth()
+
+  return new Date(yearStore.value, date)
 })
 </script>
 

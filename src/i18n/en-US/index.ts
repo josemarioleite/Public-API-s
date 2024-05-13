@@ -27,7 +27,16 @@ export default {
       }
     },
     holiday: {
-      loading: 'Waiting a moment...'
+      loading: 'Waiting a moment...',
+      table: {
+        titleTable: 'Table',
+        name: 'Name',
+        nameInternational: 'Internacional Name',
+        global: {
+          title: 'Global Event',
+          value: 'Yes_No'
+        }
+      }
     }
   },
   header: {
