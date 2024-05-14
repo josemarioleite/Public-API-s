@@ -29,7 +29,10 @@
     @view-change="eventChange"
   >
     <template #events-count="{ events }">
-      <span style="cursor: pointer;">
+      <span v-if="locale === 'en-US'" style="cursor: pointer;">
+        {{ String(events.map(v => v.title)).replace('[\[\."\]]', '') }}
+      </span>
+      <span v-else style="cursor: pointer;">
         {{ String(events.map(v => v.content)).replace('[\[\."\]]', '') }}
       </span>
     </template>
@@ -38,21 +41,22 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed } from 'vue'
 import { useHolidayStore } from '../../stores/holiday.store'
+import { useI18n } from 'vue-i18n'
 import VueCal from 'vue-cal'
 
 defineOptions({
   name: 'VueCal',
 })
 
+const locale = useI18n().locale.value
 const currentDate = computed(() => {
   const yearStore = computed(() => holidayStore.year)
   const date = new Date().getMonth()
 
   return new Date(yearStore.value, date)
 })
-
 const activeView = ref<string>('month')
 const holidayStore = useHolidayStore()
 const lang = computed(() => {
