@@ -31,6 +31,7 @@ export default {
       table: {
         titleTable: 'Tabela de feriados',
         name: 'Nome',
+        date: 'Data',
         nameInternational: 'Nome Internacional',
         global: {
           title: 'Evento Global',

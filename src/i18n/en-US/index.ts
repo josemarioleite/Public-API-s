@@ -30,6 +30,7 @@ export default {
       loading: 'Waiting a moment...',
       table: {
         titleTable: 'Table',
+        date: 'Date',
         name: 'Name',
         nameInternational: 'Internacional Name',
         global: {

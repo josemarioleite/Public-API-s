@@ -32,7 +32,7 @@ const holidays = computed(() => holidayStore.holidays)
 const isLoading = computed(() => holidayStore.isLoading)
 const columns = computed(() => {
   const columns: QTableColumn[] = [
-    { name: 'date', align: 'center', field: 'end', label: $t('pages.holiday.table.name'), format: v => formatDate(v) },
+    { name: 'date', align: 'center', field: 'end', label: $t('pages.holiday.table.date'), format: v => formatDate(v) },
     { name: 'name', align: 'left', field: 'content', label: $t('pages.holiday.table.name') },
     { name: 'nameInternacional', align: 'left', field: 'title', label: $t('pages.holiday.table.nameInternational') }
   ]
