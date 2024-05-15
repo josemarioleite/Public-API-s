@@ -17,3 +17,22 @@ export function generateColdColor () {
 
   return `rgb(${red}, ${green}, ${blue})`
 }
+
+export function formateToRGBString (valueRgb: number[]): string {
+  return `rgb(${valueRgb[0]}, ${valueRgb[1]}, ${valueRgb[2]})`
+}
+
+export function extractValuesRGB (rgbString: string): number[] {
+  const regex = /rgb\((\d+),\s*(\d+),\s*(\d+)\)/
+  const matches = rgbString.match(regex)
+
+  if (matches && matches.length === 4) {
+      const r = parseInt(matches[1])
+      const g = parseInt(matches[2])
+      const b = parseInt(matches[3])
+
+      return [r, g, b]
+  } else {
+      return []
+  }
+}

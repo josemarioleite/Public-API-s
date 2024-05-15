@@ -19,6 +19,7 @@ module.exports = configure(function (ctx) {
     build: {
       env: {
         VUE_API_ACCESS: 'https://api-public-nine.vercel.app/api/v1/'
+        // VUE_API_ACCESS: 'http://localhost:3500/api/v1/'
       },
       target: {
         browser: [ 'es2019', 'edge88', 'firefox78', 'chrome87', 'safari13.1' ],

@@ -4,7 +4,8 @@ export default {
       home: 'Início',
       bible: 'A Bíblia Sagrada',
       anime: 'Anime',
-      holiday: 'Feriados'
+      holiday: 'Feriados',
+      colors_generator: 'Gerador de Cores'
     },
     bible: {
       header: {
@@ -38,12 +39,15 @@ export default {
           value: 'Sim_Não'
         }
       }
+    },
+    colors: {
+      copy: 'Copiado com sucesso'
     }
   },
   header: {
     title: "API's Públicas",
     main: {
-      title: "Início_A-Bíblia-Sagrada_Feriados"
+      title: "Início_A-Bíblia-Sagrada_Feriados_Gerador-de-Cores"
     }
   }
 }

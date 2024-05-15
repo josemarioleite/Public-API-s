@@ -4,7 +4,8 @@ export default {
       home: 'Home',
       bible: 'The Holy Bible',
       anime: 'Animes',
-      holiday: 'Holidays'
+      holiday: 'Holidays',
+      colors_generator: 'Colors Generator'
     },
     bible: {
       header: {
@@ -38,12 +39,15 @@ export default {
           value: 'Yes_No'
         }
       }
+    },
+    colors: {
+      copy: 'Successfully copied'
     }
   },
   header: {
     title: "API Public",
     main: {
-      title: "Home_The-Holy-Bible_Holidays"
+      title: "Home_The-Holy-Bible_Holidays_Colors-Generator"
     }
   }
 }
