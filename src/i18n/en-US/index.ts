@@ -39,6 +39,9 @@ export default {
           value: 'Yes_No'
         }
       }
+    },
+    colors: {
+      copy: 'Successfully copied'
     }
   },
   header: {

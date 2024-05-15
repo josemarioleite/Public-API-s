@@ -39,6 +39,9 @@ export default {
           value: 'Sim_Não'
         }
       }
+    },
+    colors: {
+      copy: 'Copiado com sucesso'
     }
   },
   header: {

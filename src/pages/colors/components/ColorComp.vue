@@ -6,19 +6,30 @@
     no-footer
     readonly
   />
-  <div class="color__copy">
+  <div class="color__copy" @click="copyColor">
     <p class="color__copy--content">{{ VCustom }}</p>
-    <!-- <q-icon name="content_copy" /> -->
   </div>
 </div>
 </template>
 
 <script lang="ts" setup>
+import { Notify, copyToClipboard } from 'quasar'
+import { useI18n } from 'vue-i18n'
+
 interface Props {
   VCustom: string
 }
 
-defineProps<Props>()
+const $t = useI18n().t
+const props = defineProps<Props>()
+
+const copyColor = () => {
+  console.log(props.VCustom)
+  return copyToClipboard(props.VCustom)
+    .then(() => {
+      return Notify.create({ message: $t('pages.colors.copy'), color: 'green' })
+    })
+}
 </script>
 
 <style lang="scss" scoped>
@@ -30,6 +41,7 @@ defineProps<Props>()
 
   &__copy {
     height: 30px;
+    border-radius: 8px;
     background: #686666;
     color: #fff;
 
@@ -38,15 +50,11 @@ defineProps<Props>()
       padding-top: 5px;
       margin-top: 10px;
     }
-
-    &--content:hover {
-      display: none;
-    }
   }
 
   &__copy:hover {
     cursor: pointer;
-    background-color: #144e7e;
+    background: #054172;
   }
 }
 
